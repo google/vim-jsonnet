@@ -1,5 +1,4 @@
-vim-jsonnet
-===========
+# vim-jsonnet
 
 [Jsonnet][jsonnet] filetype plugin for Vim.
 
@@ -7,8 +6,7 @@ vim-jsonnet
 
 ![A screenshot of Jsonnet syntax highlighting](https://raw.githubusercontent.com/google/vim-jsonnet/master/jsonnet-screenshot.png)
 
-Install
--------
+# Install
 
 To install via Vim plugin managers:
 
@@ -29,3 +27,9 @@ Plug 'google/vim-jsonnet'
 ```sh
 git clone https://github.com/google/vim-jsonnet ~/.vim/bundle-vim-jsonnet
 ```
+
+## More Info
+
+For more info on Jsonnet:
+* Jsonnet Website: http://google.github.io/jsonnet/doc
+* Jsonnet Repository: https://github.com/google/jsonnet
