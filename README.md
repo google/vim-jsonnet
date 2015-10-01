@@ -5,7 +5,7 @@ vim-jsonnet
 
 [jsonnet]: http://google.github.io/jsonnet/doc/
 
-![A screenshot of Jsonnet syntax highlighting](https://raw.githubusercontent.com/google/language-jsonnet/master/jsonnet-screenshot.png)
+![A screenshot of Jsonnet syntax highlighting](https://raw.githubusercontent.com/google/vim-jsonnet/master/jsonnet-screenshot.png)
 
 Install
 -------
