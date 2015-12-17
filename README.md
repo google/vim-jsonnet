@@ -2,7 +2,7 @@
 
 [Jsonnet][jsonnet] filetype plugin for Vim.
 
-[jsonnet]: http://google.github.io/jsonnet/doc/
+[jsonnet]: http://jsonnet.org
 
 ![A screenshot of Jsonnet syntax highlighting](https://raw.githubusercontent.com/google/vim-jsonnet/master/jsonnet-screenshot.png)
 
@@ -31,5 +31,5 @@ git clone https://github.com/google/vim-jsonnet ~/.vim/bundle-vim-jsonnet
 ## More Info
 
 For more info on Jsonnet:
-* Jsonnet Website: http://google.github.io/jsonnet/doc
+* Jsonnet Website: http://jsonnet.org
 * Jsonnet Repository: https://github.com/google/jsonnet
