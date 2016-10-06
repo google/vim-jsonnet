@@ -37,7 +37,7 @@ endfunction
 
 
 " CheckBinPath checks whether the given binary exists or not and returns the
-" path of the binary. It returns an empty string doesn't exists.
+" path of the binary. It returns an empty string if it doesn't exists.
 function! jsonnet#CheckBinPath(binName)
 
     if executable(a:binName)
@@ -57,38 +57,38 @@ endfunction
 " jsonnet fmt command too.
 function! jsonnet#Format()
 
-   " Save cursor position and many other things.
-   let l:curw = winsaveview()
+    " Save cursor position and many other things.
+    let l:curw = winsaveview()
 
-   " Write current unsaved buffer to a temp file
-   let l:tmpname = tempname()
-   call writefile(getline(1, '$'), l:tmpname)
+    " Write current unsaved buffer to a temp file
+    let l:tmpname = tempname()
+    call writefile(getline(1, '$'), l:tmpname)
 
-   " get the command first so we can test it
-   let l:binName = g:jsonnet_command
+    " get the command first so we can test it
+    let l:binName = g:jsonnet_command
 
-  " check if the user has installed command binary.
-   let l:binPath = jsonnet#CheckBinPath(l:binName)
-   if empty(l:binPath)
-     return
-   endif
+   " check if the user has installed command binary.
+    let l:binPath = jsonnet#CheckBinPath(l:binName)
+    if empty(l:binPath)
+      return
+    endif
 
 
-   " Populate the final command.
-   let l:command = l:binPath . " " . g:jsonnet_fmt_command
-   " The inplace modification is default. Makes file management easier
-   " Indentation spacing is 4 by default
-   let l:command = l:command . ' -i -n 4 '
-   let l:command = l:command . g:jsonnet_fmt_options
+    " Populate the final command.
+    let l:command = l:binPath . " " . g:jsonnet_fmt_command
+    " The inplace modification is default. Makes file management easier
+    " Indentation spacing is 4 by default
+    let l:command = l:command . ' -i -n 4 '
+    let l:command = l:command . g:jsonnet_fmt_options
 
-   " Execute the compiled jsonnet fmt command and save the return value
-   let l:out = jsonnet#System(l:command . " " . l:tmpname)
-   let l:errorCode = v:shell_error
+    " Execute the compiled jsonnet fmt command and save the return value
+    let l:out = jsonnet#System(l:command . " " . l:tmpname)
+    let l:errorCode = v:shell_error
 
-   " The format command succeeded
-   " Move the formatted temp file over the current file and restore other
-   " settings
-   if l:errorCode == 0
+    if l:errorCode == 0
+        " The format command succeeded Move the formatted temp file over the
+        " current file and restore other settings
+
         " stop undo recording
         try | silent undojoin | catch | endtry
 

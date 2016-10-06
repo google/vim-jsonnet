@@ -1,9 +1,6 @@
 *vim-jsonnet.txt* Jsonnet development plugin
 *vim-jsonnet*
 
-
-
-
 ====================================================================================
   #     # ### #     #             #  #####  ####### #     # #     # ####### #######
   #     #  #  ##   ##             # #     # #     # ##    # ##    # #          #
@@ -33,7 +30,6 @@ INSTALL                                                           *jsonnet-insta
 ==============================================================================
 COMMANDS                                                         *jsonnet-commands*
 
-
                                                                       *:JsonnetFmt*
 :JsonnetFmt
 
@@ -53,7 +49,6 @@ Filter the current Jsonnet buffer through `jsonnet fmt`.  It tries to
 preserve cursor position and avoids replacing the buffer with stderr
 output.
 
-
 ==============================================================================
 SETTINGS                                                        *jsonnet-settings*
 
@@ -65,15 +60,15 @@ Use this option to auto |:JsonnetFmt| on save. By default it's enabled >
 <
                                                              *'g:jsonnet_command'*
 
-Use this option to define which tool is used to jsonet fmt. By default `jsonnet` is
+Use this option to define which tool is used to fotmat. By default `jsonnet` is
 used >
 
   let g:jsonnet_command = "jsonnet"
 <
                                                          *'g:jsonnet_fmt_command'*
 
-Use this option to define which <cmd> parameter is used to *g:jsonnet_command* tool.
-By default `fmt` isused >
+Use this option to define which <cmd> parameter is used with *g:jsonnet_command* tool.
+By default `fmt` is used >
 
   let g:jsonnet_fmt_command = "fmt"
 <
