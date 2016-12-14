@@ -43,8 +43,10 @@ function! jsonnet#CheckBinPath(binName)
     if executable(a:binName)
         if exists('*exepath')
             let binPath = exepath(a:binName)
+	    return binPath
+        else
+	   return a:binName
         endif
-        return binPath
     else
         echo "vim-jsonnet: could not find '" . a:binName . "'."
         return ""
