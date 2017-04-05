@@ -92,6 +92,7 @@ syn region String start='|||' end='|||'
 
 " Highlight python style string formatting.
 syn match Special "%\%(([^)]\+)\)\=[-#0 +]*\d*\%(\.\d\+\)\=[hlL]\=[diouxXeEfFgGcrs%]" contained containedin=String
+syn match Special "%[-#0 +]*\%(\*\|\d\+\)\=\%(\.\%(\*\|\d\+\)\)\=[hlL]\=[diouxXeEfFgGcrs%]" contained containedin=String
 
 syn region Comment start="/[*]" end="[*]/"
 syn match Comment "//.*$"
