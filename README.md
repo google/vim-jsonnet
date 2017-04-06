@@ -25,7 +25,7 @@ Plug 'google/vim-jsonnet'
 ### Pathogen
 
 ```sh
-git clone https://github.com/google/vim-jsonnet ~/.vim/bundle-vim-jsonnet
+git clone https://github.com/google/vim-jsonnet ~/.vim/bundle/vim-jsonnet
 ```
 
 ## More Info
