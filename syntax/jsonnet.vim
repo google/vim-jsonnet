@@ -34,7 +34,9 @@ syn match Constant "std.log"
 syn match Constant "std.makeArray"
 syn match Constant "std.mantissa"
 syn match Constant "std.objectFields"
+syn match Constant "std.objectFieldsAll"
 syn match Constant "std.objectHas"
+syn match Constant "std.objectHasAll"
 syn match Constant "std.pow"
 syn match Constant "std.sin"
 syn match Constant "std.sqrt"
@@ -44,6 +46,9 @@ syn match Constant "std.type"
 
 " std.jsonnet
 syn match Constant "std.abs"
+syn match Constant "std.base64"
+syn match Constant "std.base64Decode"
+syn match Constant "std.base64DecodeBytes"
 syn match Constant "std.assertEqual"
 syn match Constant "std.escapeStringBash"
 syn match Constant "std.escapeStringDollars"
@@ -61,6 +66,8 @@ syn match Constant "std.manifestPython"
 syn match Constant "std.manifestPythonVars"
 syn match Constant "std.map"
 syn match Constant "std.max"
+syn match Constant "std.md5"
+syn match Constant "std.mergePatch"
 syn match Constant "std.min"
 syn match Constant "std.mod"
 syn match Constant "std.range"
@@ -82,6 +89,10 @@ syn match Type "\$"
 syn region String start='L\="' skip='\\\\\|\\"' end='"'
 syn region String start='L\=\'' skip='\\\\\|\\\'' end='\''
 syn region String start='|||' end='|||'
+
+" Highlight python style string formatting.
+syn match Special "%\%(([^)]\+)\)\=[-#0 +]*\d*\%(\.\d\+\)\=[hlL]\=[diouxXeEfFgGcrs%]" contained containedin=String
+syn match Special "%[-#0 +]*\%(\*\|\d\+\)\=\%(\.\%(\*\|\d\+\)\)\=[hlL]\=[diouxXeEfFgGcrs%]" contained containedin=String
 
 syn region Comment start="/[*]" end="[*]/"
 syn match Comment "//.*$"
