@@ -79,8 +79,7 @@ function! jsonnet#Format()
     " Populate the final command.
     let l:command = l:binPath . " " . g:jsonnet_fmt_command
     " The inplace modification is default. Makes file management easier
-    " Indentation spacing is 4 by default
-    let l:command = l:command . ' -i -n 4 '
+    let l:command = l:command . ' -i '
     let l:command = l:command . g:jsonnet_fmt_options
 
     " Execute the compiled jsonnet fmt command and save the return value
