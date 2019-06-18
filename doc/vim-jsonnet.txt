@@ -33,7 +33,7 @@ COMMANDS                                                         *jsonnet-comman
                                                                       *:JsonnetFmt*
 :JsonnetFmt
 
-Filter the current Jsonnet buffer through `jsonnet fmt`.  It tries to
+Filter the current Jsonnet buffer through `jsonnetfmt`.  It tries to
 preserve cursor position and avoids replacing the buffer with stderr
 output.
 
@@ -45,7 +45,7 @@ FUNCTIONS                                                       *jsonnet-functio
 
                                                                  *jsonnet#Format()*
 
-Filter the current Jsonnet buffer through `jsonnet fmt`.  It tries to
+Filter the current Jsonnet buffer through `jsonnetfmt`.  It tries to
 preserve cursor position and avoids replacing the buffer with stderr
 output.
 
