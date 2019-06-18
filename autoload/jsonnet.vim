@@ -7,7 +7,7 @@ if !exists("g:jsonnet_command")
 endif
 
 if !exists("g:jsonnet_fmt_command")
-  let g:jsonnet_fmt_command = "fmt"
+  let g:jsonnet_fmt_command = "jsonnetfmt"
 endif
 
 if !exists('g:jsonnet_fmt_options')
@@ -54,9 +54,9 @@ function! jsonnet#CheckBinPath(binName)
 
 endfunction
 
-" Format calls `jsonnet fmt ... ` on the file and replaces the file with the
+" Format calls `jsonnetfmt ... ` on the file and replaces the file with the
 " auto formatted version. Does some primitive error checking of the
-" jsonnet fmt command too.
+" jsonnetfmt command too.
 function! jsonnet#Format()
 
     " Save cursor position and many other things.
@@ -67,7 +67,7 @@ function! jsonnet#Format()
     call writefile(getline(1, '$'), l:tmpname)
 
     " get the command first so we can test it
-    let l:binName = g:jsonnet_command
+    let l:binName = g:jsonnet_fmt_command
 
    " check if the user has installed command binary.
     let l:binPath = jsonnet#CheckBinPath(l:binName)
@@ -77,12 +77,12 @@ function! jsonnet#Format()
 
 
     " Populate the final command.
-    let l:command = l:binPath . " " . g:jsonnet_fmt_command
+    let l:command = l:binPath
     " The inplace modification is default. Makes file management easier
     let l:command = l:command . ' -i '
     let l:command = l:command . g:jsonnet_fmt_options
 
-    " Execute the compiled jsonnet fmt command and save the return value
+    " Execute the compiled jsonnetfmt command and save the return value
     let l:out = jsonnet#System(l:command . " " . l:tmpname)
     let l:errorCode = v:shell_error
 
@@ -109,13 +109,13 @@ function! jsonnet#Format()
         let &fileformat = l:originalFileFormat
         let &syntax = &syntax
     elseif g:jsonnet_fmt_fail_silently == 0
-        " FixMe: We could leverage the errors coming from the `jsonent fmt` and
+        " FixMe: We could leverage the errors coming from the `jsonnetfmt` and
         " give immediate feedback to the user at every save time.
         " Our inspiration, vim-go, opens a new list below the current edit
         " window and shows the errors (the output of the fmt command).
         " We are not sure whether this is desired in the vim-jsonnet community
         " or not. Nevertheless, this else block is a suitable place to benefit
-        " from the `jsonnet fmt` errors.
+        " from the `jsonnetfmt` errors.
     endif
 
     " Restore our cursor/windows positions.
