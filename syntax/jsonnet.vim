@@ -110,7 +110,7 @@ syn match Type "\$"
 
 syn region String start='L\="' skip='\\\\\|\\"' end='"'
 syn region String start='L\=\'' skip='\\\\\|\\\'' end='\''
-syn region String start='|||' end='|||'
+syn region String start='|||\s*\n\+\z(\s*\)' end='^\z1\@!\s*|||'
 
 " Highlight python style string formatting.
 syn match Special "%\%(([^)]\+)\)\=[-#0 +]*\d*\%(\.\d\+\)\=[hlL]\=[diouxXeEfFgGcrs%]" contained containedin=String
