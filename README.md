@@ -22,6 +22,12 @@ Plugin 'google/vim-jsonnet'
 Plug 'google/vim-jsonnet'
 ```
 
+### dein.vim
+
+```viml
+call dein#add('google/vim-jsonnet')
+```
+
 ### Pathogen
 
 ```sh
