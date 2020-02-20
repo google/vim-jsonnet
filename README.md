@@ -28,6 +28,14 @@ Plug 'google/vim-jsonnet'
 git clone https://github.com/google/vim-jsonnet ~/.vim/bundle/vim-jsonnet
 ```
 
+### Neovim with no Package Manager
+
+```sh
+mkdir ~/.local/share/nvim/site/pack/plugins/start
+cd ~/.local/share/nvim/site/pack/plugins/start
+git clone https://github.com/google/vim-jsonnet
+```
+
 ## More Info
 
 For more info on Jsonnet:
