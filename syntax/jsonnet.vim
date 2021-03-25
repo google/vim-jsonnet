@@ -136,16 +136,17 @@ syn region Comment start="/[*]" end="[*]/"
 syn match Comment "//.*$"
 syn match Comment "#.*$"
 
-syn match Keyword "\<[a-zA-Z_][a-z0-9A-Z_]*\s*\(([^)]*)\)\?\s*+\?::\?:\?"
+syn region Object start=/^\s*{/ end=/\s*}\s*$/ fold transparent
+syn region jsonnetFunction start=/^\s*[a-zA-Z_][a-zA-Z0-9_]*(/ end=/):\{1,2\}/ contained containedin=Object
+syn match jsonnetSubObject "[a-zA-Z_][a-zA-Z0-9_]*:\{1,2\}" contained containedin=Object
 
-syn region Keyword start=/^\s*\<[a-zA-Z_][a-z0-9A-Z_]*\s*([^)]*/ end=/)::\?/
-
-syn region Object start="{" end="}" fold transparent
+hi link jsonnetFunction Function
+hi link jsonnetSubObject Keyword
 
 syntax keyword Include import importstr
-syntax keyword Type function self super
+syntax keyword Type function self super local
 syntax keyword Statement assert if then else for in
-syntax keyword Special local tailstrict
+syntax keyword Special tailstrict
 syntax keyword Constant true false null
 syntax keyword Underlined error
 
