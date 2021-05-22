@@ -141,10 +141,10 @@ function! jsonnet#FormatVisual()
     " Get current visual selection
     let l:selection = jsonnet#GetVisualSelection()
 
-    " get the command first so we can test it
+    " Get the command first so we can test it
     let l:binName = g:jsonnet_fmt_command
 
-   " check if the user has installed command binary.
+    " Check if the user has installed command binary.
     let l:binPath = jsonnet#CheckBinPath(l:binName)
     if empty(l:binPath)
       return
@@ -159,15 +159,17 @@ function! jsonnet#FormatVisual()
     let l:out = jsonnet#System(l:command . " \"" . l:selection . "\"")
     let l:errorCode = v:shell_error
 
+    " Save register contents
     let reg = '"'
     let save_cb = &cb
     let regInfo = getreginfo(reg)
     try
-        norm! y{motion}
-        let keeper = getreg(reg)
+        " Set register to formatted output
         call setreg(reg,l:out)
+        " Paste formatted output
         silent exe 'norm! gv'.(reg == '"' ? '' : '"' . reg).'p`['
     finally
+        " Restore register contents
         let &cb = save_cb
         call setreg(reg, regInfo)
     endtry
