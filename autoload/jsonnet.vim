@@ -122,4 +122,53 @@ function! jsonnet#Format()
     call winrestview(l:curw)
 endfunction
 
+function! jsonnet#GetVisualSelection()
+    " Source: https://stackoverflow.com/a/6271254
+    " Why is this not a built-in Vim script function?!
+    let [line_start, column_start] = getpos("'<")[1:2]
+    let [line_end, column_end] = getpos("'>")[1:2]
+    let lines = getline(line_start, line_end)
+    if len(lines) == 0
+        return ''
+    endif
+    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
+    let lines[0] = lines[0][column_start - 1:]
+    return join(lines, "\n")
+endfun
 
+" Format calls `jsonnetfmt ... ` on a Visual selection
+function! jsonnet#FormatVisual()
+    " Get current visual selection
+    let l:selection = jsonnet#GetVisualSelection()
+
+    " get the command first so we can test it
+    let l:binName = g:jsonnet_fmt_command
+
+   " check if the user has installed command binary.
+    let l:binPath = jsonnet#CheckBinPath(l:binName)
+    if empty(l:binPath)
+      return
+    endif
+
+    " Populate the final command.
+    let l:command = l:binPath
+    let l:command = l:command . ' -e '
+    let l:command = l:command . g:jsonnet_fmt_options
+
+    " Execute the compiled jsonnetfmt command and save the return value
+    let l:out = jsonnet#System(l:command . " \"" . l:selection . "\"")
+    let l:errorCode = v:shell_error
+
+    let reg = '"'
+    let save_cb = &cb
+    let regInfo = getreginfo(reg)
+    try
+        norm! y{motion}
+        let keeper = getreg(reg)
+        call setreg(reg,l:out)
+        silent exe 'norm! gv'.(reg == '"' ? '' : '"' . reg).'p`['
+    finally
+        let &cb = save_cb
+        call setreg(reg, regInfo)
+    endtry
+endfunction
