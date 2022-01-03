@@ -123,6 +123,8 @@ syn match Comment "#.*$"
 syn match Keyword "\<[a-zA-Z_][a-z0-9A-Z_]*\s*\(([^)]*)\)\?\s*+\?::\?:\?"
 
 syn region Object start="{" end="}" fold transparent
+syn region Object start="(" end=")" fold transparent
+syn region Object start="=" end=";" fold transparent
 
 syntax keyword Include import importstr
 syntax keyword Type function self super
