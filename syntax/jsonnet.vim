@@ -116,9 +116,9 @@ syn region String start='|||\s*\n\+\z(\s*\)' end='^\z1\@!\s*|||'
 syn match Special "%\%(([^)]\+)\)\=[-#0 +]*\d*\%(\.\d\+\)\=[hlL]\=[diouxXeEfFgGcrs%]" contained containedin=String
 syn match Special "%[-#0 +]*\%(\*\|\d\+\)\=\%(\.\%(\*\|\d\+\)\)\=[hlL]\=[diouxXeEfFgGcrs%]" contained containedin=String
 
-syn region Comment start="/[*]" end="[*]/"
-syn match Comment "//.*$"
-syn match Comment "#.*$"
+syn region Comment start="/[*]" end="[*]/" contains=@Spell
+syn match Comment "//.*$" contains=@Spell
+syn match Comment "#.*$" contains=@Spell
 
 syn match Keyword "\<[a-zA-Z_][a-z0-9A-Z_]*\s*\(([^)]*)\)\?\s*+\?::\?:\?"
 
