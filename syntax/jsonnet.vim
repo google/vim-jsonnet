@@ -137,7 +137,7 @@ syn match Comment "//.*$"
 syn match Comment "#.*$"
 
 syn region Object start=/[\[{]/ end=/^\s*[}\]][,;]*\s*$/ fold transparent
-syn region jsonnetFunction start=/^\s*[a-zA-Z_][a-zA-Z0-9_]*(/ end=/):\{1,2\}/ contained containedin=Object
+syn region jsonnetFunction start=/^\s*[a-zA-Z_][a-zA-Z0-9_]*(/ end=/):\{0,2\}/ contained containedin=Object
 syn match jsonnetSubObject "[a-zA-Z_][a-zA-Z0-9_]*+*:\{1,2\}" contained containedin=Object
 
 hi link jsonnetFunction Function
