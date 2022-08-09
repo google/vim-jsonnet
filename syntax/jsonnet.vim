@@ -124,30 +124,33 @@ syn match Constant "std.uniq"
 
 syn match Type "\$"
 
-syn region String start='L\="' skip='\\\\\|\\"' end='"'
-syn region String start='L\=\'' skip='\\\\\|\\\'' end='\''
-syn region String start='|||\s*\n\+\z(\s*\)' end='^\z1\@!\s*|||'
+syn region String start='L\="' skip='\\\\\|\\"' end='"' contains=Special
+syn region String start='L\=\'' skip='\\\\\|\\\'' end='\'' contains=Special
+syn region String start='|||\s*\n\+\z(\s*\)' end='^\z1\@!\s*|||' contains=Special
 
 " Highlight python style string formatting.
-syn match Special "%\%(([^)]\+)\)\=[-#0 +]*\d*\%(\.\d\+\)\=[hlL]\=[diouxXeEfFgGcrs%]" contained containedin=String
-syn match Special "%[-#0 +]*\%(\*\|\d\+\)\=\%(\.\%(\*\|\d\+\)\)\=[hlL]\=[diouxXeEfFgGcrs%]" contained containedin=String
+syn match Special contained "%\%(([^)]\+)\)\=[-#0 +]*\d*\%(\.\d\+\)\=[hlL]\=[diouxXeEfFgGcrs%]"
+syn match Special contained "%[-#0 +]*\%(\*\|\d\+\)\=\%(\.\%(\*\|\d\+\)\)\=[hlL]\=[diouxXeEfFgGcrs%]"
 
 syn region Comment start="/[*]" end="[*]/"
 syn match Comment "//.*$"
 syn match Comment "#.*$"
 
-syn region Object start=/[\[{]/ end=/^\s*[}\]][,;]*\s*$/ fold transparent
-syn region jsonnetFunction start=/^\s*[a-zA-Z_][a-zA-Z0-9_]*(/ end=/):\{0,2\}/ contained containedin=Object
-syn match jsonnetSubObject "[a-zA-Z_][a-zA-Z0-9_]* *+*:\{1,2\}" contained containedin=Object
+syn region jsObject fold transparent start="{" end=/}\(\_s\+\ze\("\|{\)\)\@!/ contains=@jsonnetSpecial,jsonnetSubObject,jsonnetFunction,jsObject
+syn region jsArray fold transparent start="\[" end=/]\(\_s\+\ze"\)\@!/ contains=@jsonnetSpecial
+syn region jsonnetFunction contained start=/^\s*[a-zA-Z_][a-zA-Z0-9_]*(/ end=/):\{0,2\}/ contains=@jsonnetSpecial
+syn match  jsonnetSubObject contained "[a-zA-Z_][a-zA-Z0-9_]* *+*:\{1,2\}"
 
+hi link jsObject Object
 hi link jsonnetFunction Function
 hi link jsonnetSubObject Keyword
 
-syntax keyword Include import importstr
-syntax keyword Type function self super local
-syntax keyword Statement assert if then else for in
-syntax keyword Special tailstrict
-syntax keyword Constant true false null
-syntax keyword Underlined error
+syn cluster jsonnetSpecial contains=Include,Type,Statement,Constant,Underlined,Comment,Type,Number,String
+syn keyword Include import importstr
+syn keyword Type function self super local
+syn keyword Statement assert if then else for in
+syn keyword Special tailstrict
+syn keyword Constant true false null
+syn keyword Underlined error
 
 
