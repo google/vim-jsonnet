@@ -60,7 +60,7 @@ Use this option to auto |:JsonnetFmt| on save. By default it's enabled >
 <
                                                              *'g:jsonnet_command'*
 
-Use this option to define which tool is used to fotmat. By default `jsonnet` is
+Use this option to define which tool is used to format. By default `jsonnet` is
 used >
 
   let g:jsonnet_command = "jsonnet"
