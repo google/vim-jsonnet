@@ -28,3 +28,4 @@ augroup vim-jsonnet
    autocmd BufWritePre *.libsonnet call s:fmtAutosave()
 augroup END
 
+command! -range JsonnetFmtVis call jsonnet#FormatVisual()
