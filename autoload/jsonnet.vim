@@ -175,15 +175,9 @@ function! jsonnet#FormatVisual()
     endtry
 endfunction
 
-" Evaluate jsonnet into vsplit, optionally use Tanka if available
-function! jsonnet#JsonnetEval()
-  " check if the file is a tanka file or not
-  let output = system("tk tool jpath " . shellescape(expand('%')))
-  if v:shell_error
-    let output = system("jsonnet " . shellescape(expand('%')))
-  else
-    let output = system("tk eval " . shellescape(expand('%')))
-  endif
+" Evaluate jsonnet into vsplit
+function! jsonnet#Eval()
+  let output = system(g:jsonnet_command . ' ' . shellescape(expand('%')))
   vnew
   setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile ft=jsonnet
   put! = output
