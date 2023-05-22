@@ -18,6 +18,10 @@ if !exists('g:jsonnet_fmt_fail_silently')
   let g:jsonnet_fmt_fail_silently = 1
 endif
 
+if !exists('g:jsonnet_reuse_buffer')
+  let g:jsonnet_reuse_buffer = 0
+endif
+
 
 " System runs a shell command. It will reset the shell to /bin/sh for Unix-like
 " systems if it is executable.
@@ -180,7 +184,19 @@ endfunction
 " Evaluate jsonnet into vsplit
 function! jsonnet#Eval()
   let output = system(g:jsonnet_command . ' ' . shellescape(expand('%')))
-  vnew
+
+  if g:jsonnet_reuse_buffer != 0
+    let bnr = bufwinnr(g:jsonnet_command)
+    if bnr > 0
+      :exe bnr . "wincmd w"
+    else
+      " Create buffer if doesn't exist
+      silent execute 'vsplit ' . g:jsonnet_command
+    endif
+  else
+    vnew
+  endif
   setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile ft=jsonnet
-  put! = output
+  :%delete _
+  call setline(1, split(output, '\n'))
 endfunction
