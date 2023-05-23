@@ -30,12 +30,17 @@ INSTALL                                                           *jsonnet-insta
 ==============================================================================
 COMMANDS                                                         *jsonnet-commands*
 
+                                                                     *:JsonnetEval*
+:JsonnetEval
+
+Evaluate the current Jsonnet buffer with |'g:jsonnet_command'| and show the
+result in a vertical split.
+
                                                                       *:JsonnetFmt*
 :JsonnetFmt
 
-Filter the current Jsonnet buffer through `jsonnetfmt`.  It tries to
-preserve cursor position and avoids replacing the buffer with stderr
-output.
+Filter the current Jsonnet buffer through |'g:jsonnet_fmt_command'|.  It tries
+to preserve cursor position and avoids replacing the buffer with stderr output.
 
 ==============================================================================
 MAPPINGS                                                        *jsonnet-mappings*
@@ -43,11 +48,19 @@ MAPPINGS                                                        *jsonnet-mapping
 ==============================================================================
 FUNCTIONS                                                       *jsonnet-functions*
 
+                                                                 *jsonnet#Eval()*
+
+Evaluate the current Jsonnet buffer with |'g:jsonnet_command'| and show the result
+in a vertical split.
+
                                                                  *jsonnet#Format()*
 
-Filter the current Jsonnet buffer through `jsonnetfmt`.  It tries to
-preserve cursor position and avoids replacing the buffer with stderr
-output.
+Filter the current Jsonnet buffer through |'g:jsonnet_fmt_command'|.  It tries
+to preserve cursor position and avoids replacing the buffer with stderr output.
+
+                                                           *jsonnet#FormatVisual()*
+
+Filter the current visual selection through |'g:jsonnet_fmt_command'|.
 
 ==============================================================================
 SETTINGS                                                        *jsonnet-settings*
@@ -60,33 +73,39 @@ Use this option to auto |:JsonnetFmt| on save. By default it's enabled >
 <
                                                              *'g:jsonnet_command'*
 
-Use this option to define which tool is used to format. By default `jsonnet` is
-used >
+Use this option to define which tool is used to evaluate a buffer. By default
+`jsonnet` is used >
 
   let g:jsonnet_command = "jsonnet"
 <
+                                                        *'g:jsonnet_reuse_buffer'*
+
+Use this option reuse the buffer while calling |:JsonnetEval|. By default this
+is turned off. >
+
+  let g:jsonnet_reuse_buffer = 0
+<
                                                          *'g:jsonnet_fmt_command'*
 
-Use this option to define which <cmd> parameter is used with *g:jsonnet_command* tool.
-By default `fmt` is used >
+Use this option to define which fmt command is used. By default `jsonnetfmt` is
+used >
 
-  let g:jsonnet_fmt_command = "fmt"
+  let g:jsonnet_fmt_command = "jsonnetfmt"
 <
                                                          *'g:jsonnet_fmt_options'*
 
-Use this option to add additional options to the
-|'g:jsonnet_command'| + |'g:jsonnet_fmt_command'|. Default is empty. >
+Use this option to add additional options to the |'g:jsonnet_fmt_command'|.
+Default is empty. >
 
   let g:jsonnet_fmt_options = ''
 <
                                                    *'g:jsonnet_fmt_fail_silently'*
 
-Use this option to enable processing of
-|'g:jsonnet_command'| + |'g:jsonnet_fmt_command'| command if it fails. By default
-it is turned off. By default the error output from the
-|'g:jsonnet_command'| + |'g:jsonnet_fmt_command'| command is ignored.
-FixMe: The processing of the |'g:jsonnet_command'| + |'g:jsonnet_fmt_command'|
-is not implemented yet. So clearing this option would not do anything at this time. >
+Use this option to enable processing of |'g:jsonnet_fmt_command'| command if it
+fails. By default it is turned off. By default the error output from the
+|'g:jsonnet_fmt_command'| command is ignored.
+FixMe: The processing of the |'g:jsonnet_fmt_command'| is not implemented yet.
+So clearing this option would not do anything at this time. >
 
   let g:jsonnet_fmt_fail_silently = 1
 <
